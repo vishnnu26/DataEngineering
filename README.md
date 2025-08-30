@@ -44,8 +44,9 @@ BACKFILL COMMAND:
       -> \dt <table_name> ==> Returns present or not.
      
 * docker exec -it <container_id> python   # Inside the container.
-
+   
     import pkgutil
+  
     from airflow.providers.postgres as pkg
-    # Brings out all the submodules inside the providers.postgres package.
+    -- Brings out all the submodules inside the providers.postgres package.
     print([m.name for m in pkgutil.iter_modules(pkg.__path__)])
