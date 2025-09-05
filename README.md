@@ -3,7 +3,6 @@
 AirFlow Documentation - https://airflow.apache.org/docs/
 AirFlow Macros        - https://airflow.apache.org/docs/apache-airflow/1.10.9/macros.html
 
-
 # MINIO DOCKER INSTALL AND DOCKER CONTAINER UP:
 docker run \
    -p 9000:9000 \
@@ -11,6 +10,11 @@ docker run \
    -e "MINIO_ROOT_USER=AKIAIOSFODNN7EXAMPLE" \
    -e "MINIO_ROOT_PASSWORD=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" \
    quay.io/minio/minio server /data --console-address ":9001"
+
+EXTRAS :-
+      {
+      "host" : "http://host.docker.internal:9000"
+      }
 
 # DOCKER COMMANDS:
 
@@ -36,12 +40,17 @@ BACKFILL COMMAND:
                          --from-date <start_date> \
                          --to-date <to_date>
        ((start_date and end_date format ==> 2025-08-23))
-* docker exec -it <postgres_container_name / id> -U <user_name> -d <database_name>
-      -> docker exec -it <postgres_container_name / id> -U <user_name>
-      -> \l {Lists all the databases}.
-      -> \c postgres / ur_database_name ==> goes inside postgres / new database.
-      -> \dt {Lists all the tables}.
-      -> \dt <table_name> ==> Returns present or not.
+* docker exec -it <postgres_container_name / id> psql -U <user_name> -d <database_name>
+      
+      ====================================================================
+      -- In such cases -> it checks for a database with the same user_name
+            ** -> docker exec -it <postgres_container_name / id> -U <user_name>
+      ====================================================================
+      
+            -> \l {Lists all the databases}.
+            -> \c postgres / ur_database_name ==> goes inside postgres / new database.
+            -> \dt {Lists all the tables}.
+            -> \dt <table_name> ==> Returns present or not.
      
 * docker exec -it <container_id> python
        import pkgutil
@@ -49,3 +58,8 @@ BACKFILL COMMAND:
      
        print([m.name for m in pkgutil.iter_modules(pkg.__path__)])
              # Brings out all the submodules inside the providers.postgres package.
+
+# GIT COMMANDS:
+
+      git checkout -b <branch_name>
+      git push -u origin <branch_name>
